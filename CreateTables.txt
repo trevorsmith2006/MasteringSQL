@@ -1,0 +1,101 @@
+-- these scripts will delete the tables if it's already there
+
+DROP TABLE IF EXISTS StudentEnrollments;
+DROP TABLE IF EXISTS Students;
+DROP TABLE IF EXISTS Classrooms;
+
+
+-- create and populate the students table
+CREATE TABLE Students
+(
+	StudentId INTEGER PRIMARY KEY,
+	FirstName VARCHAR(200) NOT NULL,
+	LastName VARCHAR(200) NOT NULL,
+	Nationality VARCHAR(100) NOT NULL,
+	DateOfBirth DATETIME NULL
+);
+
+
+INSERT INTO Students
+	(FirstName, LastName, Nationality, DateOfBirth)
+VALUES
+	('Mickey', 'Mouse', 'American', '1991-05-02'),
+	('Donald', 'Duck', 'Japanese', '1992-11-12'),
+	('Goofy', 'Goof', 'American', '1980-04-15'),
+	('Daisy', 'Duck', 'French', '1985-02-16'),
+	('Huey', 'Duck', 'French', '1986-05-19'),
+	('Scrooge', 'McDuck', 'Japanese', '1983-11-11'),
+	('Minnie', 'Mouse', 'Canadian', '1983-11-30'),
+	('Louie', 'Duck', 'French', '1985-09-09');
+
+-- create and populate the classroom table
+CREATE TABLE Classrooms
+(
+	ClassroomId INTEGER PRIMARY KEY,
+	ClassName VARCHAR(200) NOT NULL,
+	Weight DECIMAL NOT NULL
+);
+
+INSERT INTO Classrooms
+	(ClassName, Weight)
+VALUES
+	('Public Interaction', 0.10),
+	('Pranks', 0.15),
+	('Running', 0.15),
+	('Acting', 0.30),
+	('Making Jokes', 0.30);
+
+-- create and populate the student enrollment table
+CREATE TABLE StudentEnrollments
+(
+	StudentEnrollmentId INTEGER PRIMARY KEY,
+	StudentId INTEGER NOT NULL,
+	ClassroomId INTEGER NOT NULL,
+	Grade DECIMAL NOT NULL,
+	FOREIGN KEY(StudentId) REFERENCES Students(StudentId),
+	FOREIGN KEY(ClassroomId) REFERENCES Classrooms(ClassroomId)
+);
+
+INSERT INTO StudentEnrollments
+	(StudentId, ClassroomId, Grade)
+VALUES
+	(1, 1, 91),
+	(1, 2, 68),
+	(1, 3, 89),
+	(1, 4, 60),
+	(1, 5, 65),
+	(2, 1, 79),
+	(2, 2, 85),
+	(2, 3, 68),
+	(2, 4, 89),
+	(2, 5, 80),
+	(3, 1, 96),
+	(3, 2, 62),
+	(3, 3, 78),
+	(3, 4, 100),
+	(3, 5, 64),
+	(4, 1, 81),
+	(4, 2, 90),
+	(4, 3, 85),
+	(4, 4, 95),
+	(4, 5, 64),
+	(5, 1, 81),
+	(5, 2, 73),
+	(5, 3, 60),
+	(5, 4, 99),
+	(5, 5, 70),
+	(6, 1, 75),
+	(6, 2, 74),
+	(6, 3, 69),
+	(6, 4, 79),
+	(6, 5, 88),
+	(7, 1, 60),
+	(7, 2, 75),
+	(7, 3, 82),
+	(7, 4, 66),
+	(7, 5, 65),
+	(8, 1, 69),
+	(8, 2, 81),
+	(8, 3, 100),
+	(8, 4, 63),
+	(8, 5, 62);
